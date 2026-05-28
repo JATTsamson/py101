@@ -1,0 +1,17 @@
+def main():
+    user_input=int(input("given radius:"))
+    print("the area of circle is",area(user_input))
+
+def area(radius):
+    return radius*radius*3.14
+
+main()
+
+"""
+i learned that variable scope, 
+one varable made in one function stays in that funcation
+in a new funcation, you have to rename that variable to use again
+(like user_input and radius are same thing, but the funcation is different)
+
+i have to imagine the programme using a arrow type that area() open a new funcation downwards
+"""
