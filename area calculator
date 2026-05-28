@@ -8,7 +8,7 @@ def area(radius):
 main()
 
 """
-i learned that variable scope, 
+i learned the variable scope, 
 one varable made in one function stays in that funcation
 in a new funcation, you have to rename that variable to use again
 (like user_input and radius are same thing, but the funcation is different)
