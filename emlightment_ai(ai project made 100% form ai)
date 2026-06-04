@@ -1,0 +1,83 @@
+#enlightment ai(seemed cooled in head tbh)
+
+import os
+from google import genai
+from google.genai import types
+
+# 1. Initialize the Client
+# Make sure you have set your environment variable: export GEMINI_API_KEY="your-key"
+client = genai.Client(api_key="paste your api key here")
+
+def get_spiritual_alignment():
+    print("\n--- CHOOSE YOUR SPIRITUAL ALIGNMENT ---")
+    print("1. Omnist (Mix of all world religions & myths)")
+    print("2. Secular Philosophy (Stoicism, Nihilism, Existentialism)")
+    print("3. Eastern Traditions (Buddhism, Hinduism, Taoism)")
+    print("4. Abrahamic Texts (Christianity, Islam, Judaism)")
+    
+    choice = input("Select a number (1-4): ").strip()
+    
+    alignments = {
+        "1": "All world religions, mythology, and ancient sacred texts.",
+        "2": "Secular philosophy only (Stoicism, Existentialism, Nietzschean thought). Absolutely no theology.",
+        "3": "Eastern traditions (Buddhism, Hinduism, Taoism, and the Upanishads).",
+        "4": "Abrahamic religions (The Bible, The Quran, the Torah, and theological commentaries)."
+    }
+    
+    return alignments.get(choice, alignments["1"])
+
+def run_enlightenment_ai():
+    # Get the user's flavor preference
+    spiritual_focus = get_spiritual_alignment()
+    
+    # 2. Craft the System Instruction (The Machine Learning Steering Wheel)
+    system_prompt = f"""
+    You are 'Enlightenment AI'—a ruthless, ego-shattering spiritual guide. Your purpose is to deliver harsh reality checks to human complaints using ancient wisdom.
+    
+    For your spiritual references, you MUST strictly restrict yourself to: {spiritual_focus}
+    
+    When the user presents a problem, you must reply strictly in this 4-part format:
+    
+    [THE DIAGNOSTIC]
+    A real , unvarnished, refreshing and eye opening psychological breakdown of who they are being right now (e.g., 'blind my stress and lack of rest'). Strip away their self-loathing.
+    
+    [THE SACRED VERDICT]
+    Cite a heavy-hitting, relevant quote, law, or concept from the allowed spiritual/philosophical texts. Explain how they are violating this cosmic law.
+    
+    [THE TOLL YOU ARE PAYING]
+    Describe the psychological or spiritual debt they are already paying right now by remaining stuck in this flaw. 
+    
+    [THE PENANCE]
+    Provide a specific, practical, and uncomfortable action item they must do TODAY to compensate for their flaw and fix the issue.
+    
+    Tone: loving, modern, uncompromising, and deeply insightful. Do not break character. Do not use corporate or clinical fluff language.
+    """
+    
+    print("\n==================================================")
+    print("ENLIGHTENMENT AI IS ACTIVE. CONFESS YOUR PROBLEM.")
+    print("==================================================")
+    user_problem = input("\nWhat is scraping away at your soul today? \n> ")
+
+    # 3. Call the Gemini Model
+    print("\nREACHING THINGS BIGGER THAN LIFE (KNOWLEDGE): Please wait \n")
+    
+    response = client.models.generate_content(
+        model='gemini-2.5-flash',
+        contents=user_problem,
+        config=types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            temperature=0.50 # Higher temperature makes the insults and insights more creative
+        )
+    )
+    
+    print(response.text)
+
+if __name__ == "__main__":
+    run_enlightenment_ai()
+
+
+
+"""
+really dont know what is happening tbh
+what to improve: add api, ability to save the choices in option 1, add problem again to chat a little, have option to exit on will instead of starting again and again
+"""
